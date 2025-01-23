@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+    <Spinner
+        android:id="@+id/spinnerTabletBrand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/tablet_brands"
+        android:minHeight="48dp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupCableType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radioUsbC"
+                android:text="USB-C"
+                android:layout_height="50dp"
+                android:layout_width="100dp"/>
+
+            <RadioButton android:id="@+id/radioMicroUsb"
+                android:text="Micro-USB"
+                android:layout_height="50dp"
+                android:layout_width="100dp"/>
+            <RadioButton android:id="@+id/radioNoCable"
+                android:text="Ingen kabel"
+                android:layout_height="50dp"
+                android:layout_width="100dp"/>
+        </RadioGroup>
+
+    <EditText
+        android:id="@+id/editTextBorrowerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Låners navn"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/editTextContactInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Kontaktinformation"
+        android:minHeight="48dp" />
+
+        <Button
+            android:id="@+id/buttonSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registrér udlån" />
+    </LinearLayout>

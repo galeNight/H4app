@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+    <!--visin af view, Søgefelt til filtrering af udlån
+        Listevisning til at vise udlån og  Logout-knap -->
+        <TextView
+            android:id="@+id/textViewAdminTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Udlånsoversigt"
+            android:textSize="24sp"
+            android:layout_marginBottom="16dp" />
+
+        <SearchView
+            android:id="@+id/searchViewFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Søg efter låner eller brand" />
+
+        <ListView
+            android:id="@+id/listViewLoans"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/buttonLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log ud"
+            android:layout_gravity="center" />
+    </LinearLayout>
