@@ -2,6 +2,7 @@ package com.example.udlnshndteringsappfortabletter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -32,13 +33,32 @@ public class UserActivity extends AppCompatActivity {
         editTextContactInfo = findViewById(R.id.editTextContactInfo);
         buttonSubmit = findViewById(R.id.buttonSubmit);
 
+        // Opret en liste over tabletmærker
+        String[] tabletBrands = {"Vælg tabletmærke", "Apple iPad", "Samsung Galaxy Tab", "Lenovo Tab", "Microsoft Surface", "Andet"};
+
+        // Opret en adapter til Spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                tabletBrands
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTabletBrand.setAdapter(adapter);
+
         databaseHelper = new DatabaseHelper(this);
 
         buttonSubmit.setOnClickListener(v -> registerLoan());
     }
 
     private void registerLoan() {
-        String tabletBrand = spinnerTabletBrand.getSelectedItem().toString();
+        // Tjek for null før du kalder toString()
+        Object selectedTabletBrand = spinnerTabletBrand.getSelectedItem();
+        if (selectedTabletBrand == null) {
+            Toast.makeText(this, "Vælg venligst en tabletmærke fra listen!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String tabletBrand = selectedTabletBrand.toString();
+
         int selectedCableId = radioGroupCableType.getCheckedRadioButtonId();
         String cableType = selectedCableId == R.id.radioUsbC ? "USB-C" :
                 selectedCableId == R.id.radioMicroUsb ? "Micro-USB" : "Ingen kabel";
@@ -47,6 +67,7 @@ public class UserActivity extends AppCompatActivity {
         String contactInfo = editTextContactInfo.getText().toString();
         String loanDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
 
+        // Tjek for tomme felter
         if (tabletBrand.isEmpty() || borrowerName.isEmpty()) {
             Toast.makeText(this, "Udfyld alle påkrævede felter!", Toast.LENGTH_SHORT).show();
             return;
