@@ -24,5 +24,6 @@
         <activity android:name=".UserActivity" />
         <activity android:name=".AdminLoginActivity" />
         <activity android:name=".AdminActivity" />
+        <activity android:name=".ConfirmationActivity"/>
     </application>
 </manifest>
