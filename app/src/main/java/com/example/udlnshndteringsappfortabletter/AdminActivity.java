@@ -62,13 +62,29 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-        // Klik på et udlån for at markere det som afleveret
+        // Klik på et udlån for at markere det som afleveret med diallogbox
         listViewLoans.setOnItemClickListener((parent, view, position, id) -> {
             Loan selectedLoan = loanList.get(position);
-            databaseHelper.deleteLoan(selectedLoan.getId());
-            Toast.makeText(this, "Udlån markeret som afleveret", Toast.LENGTH_SHORT).show();
-            recreate(); // Genindlæs skærmen
+
+            // Opret en dialogboks for bekræftelse
+            new AlertDialog.Builder(this)
+                    .setTitle("Bekræft sletning")
+                    .setMessage("Er du sikker på, at du vil slette dette udlån?\n\n" +
+                            "Låner: " + selectedLoan.getBorrowerName() + "\n" +
+                            "Tablet: " + selectedLoan.getTabletBrand())
+                    .setPositiveButton("Ja", (dialog, which) -> {
+                        // Slet lånet fra databasen
+                        databaseHelper.deleteLoan(selectedLoan.getId());
+                        Toast.makeText(this, "Udlån markeret som afleveret", Toast.LENGTH_SHORT).show();
+
+                        // Opdater listen
+                        loanList.remove(position);
+                        adapter.notifyDataSetChanged();
+                    })
+                    .setNegativeButton("Nej", null) // Luk dialogen uden at gøre noget
+                    .show();
         });
+
 
         // Log ud og gå tilbage til startskærmen
         buttonLogout.setOnClickListener(v -> {
