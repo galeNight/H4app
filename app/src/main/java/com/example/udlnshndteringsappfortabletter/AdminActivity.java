@@ -69,7 +69,7 @@ public class AdminActivity extends AppCompatActivity {
             // Opret en dialogboks for bekræftelse
             new AlertDialog.Builder(this)
                     .setTitle("Bekræft sletning")
-                    .setMessage("Er du sikker på, at du vil slette dette udlån?\n\n" +
+                    .setMessage("Er du sikker på, at du vil markere som afleveret?\n\n" +
                             "Låner: " + selectedLoan.getBorrowerName() + "\n" +
                             "Tablet: " + selectedLoan.getTabletBrand())
                     .setPositiveButton("Ja", (dialog, which) -> {
